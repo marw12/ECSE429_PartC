@@ -20,20 +20,19 @@ t1_end = datetime.now()
 t2_start = datetime.now()
 t2_end = datetime.now()
 
+num_objects = []
+
 sample_time_POST = []
-num_objects_POST = []
 time_t2_POST = []
 free_memory_POST = []
 cpu_usage_POST = []
 
 sample_time_DELETE = []
-num_objects_DELETE = []
 time_t2_DELETE = []
 free_memory_DELETE = []
 cpu_usage_DELETE = []
 
 sample_time_PUT = []
-num_objects_PUT = []
 time_t2_PUT = []
 free_memory_PUT = []
 cpu_usage_PUT = []
@@ -49,7 +48,7 @@ def setup_module(objects):
         subprocess.Popen(["java", "-jar", "runTodoManagerRestAPI-1.5.5.jar"], close_fds=True)
         subprocess.Popen(["sleep", "1s"]).communicate()
         
-        num_objects_POST.append(objects)
+        num_objects.append(objects)
         
         for x in range(objects):
         
@@ -203,14 +202,73 @@ for n in numbers_sizes:
     
     teardown_module()
 
+# Sample Time vs Tranaction time
 plt.plot(sample_time_POST, time_t2_POST, '-', label='POST')
 plt.plot(sample_time_DELETE, time_t2_DELETE, '-', label='DELETE')
 plt.plot(sample_time_PUT, time_t2_PUT, '-', label='PUT')
 
 plt.legend()
 plt.xlabel('Sample time')
-plt.ylabel('Transaction time')
+plt.ylabel('Transaction Time')
 plt.show()
+
+# Sample Time vs CPU Usage %
+# plt.plot(sample_time_POST, cpu_usage_POST, '-', label='POST')
+# plt.plot(sample_time_DELETE, cpu_usage_DELETE, '-', label='DELETE')
+# plt.plot(sample_time_PUT, cpu_usage_PUT, '-', label='PUT')
+
+# plt.legend()
+# plt.xlabel('Sample time')
+# plt.ylabel('CPU Used %')
+# plt.show()
+
+# Sample Time vs Free Memory %
+# plt.plot(sample_time_POST, free_memory_POST, '-', label='POST')
+# plt.plot(sample_time_DELETE, free_memory_DELETE, '-', label='DELETE')
+# plt.plot(sample_time_PUT, free_memory_PUT, '-', label='PUT')
+
+# plt.legend()
+# plt.xlabel('Sample time')
+# plt.ylabel('Free Memory %')
+# plt.show()
+
+# # Number of Objects vs Transaction Time
+# plt.plot(num_objects, time_t2_POST, '-', label='POST')
+# plt.plot(num_objects, time_t2_DELETE, '-', label='DELETE')
+# plt.plot(num_objects, time_t2_PUT, '-', label='PUT')
+
+
+# plt.legend()
+# plt.xlabel('Number of objects')
+# plt.ylabel('Transaction Time')
+# plt.show()
+
+
+# Number of Objects vs CPU Usage %
+# plt.plot(num_objects, cpu_usage_POST, '-', label='POST')
+# plt.plot(num_objects, cpu_usage_DELETE, '-', label='DELETE')
+# plt.plot(num_objects, cpu_usage_PUT, '-', label='PUT')
+
+
+# plt.legend()
+# plt.xlabel('Number of objects')
+# plt.ylabel('CPU Usage %')
+# plt.show()
+
+
+# Number of Objects vs Free Memory %
+# plt.plot(num_objects, free_memory_POST, '-', label='POST')
+# plt.plot(num_objects, free_memory_DELETE, '-', label='DELETE')
+# plt.plot(num_objects, free_memory_PUT, '-', label='PUT')
+
+
+# plt.legend()
+# plt.xlabel('Number of objects')
+# plt.ylabel('Free Memory %')
+# plt.show()
+
+
+
 
 
 
